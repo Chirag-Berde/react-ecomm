@@ -1,0 +1,37 @@
+.App {
+  text-align: center;
+}
+/* adding css for navigation animation */
+.nav-link {
+  font-weight: bold;
+  font-size: 12px;
+  text-transform: uppercase;
+  color: #031D44;
+  padding: 20px 0px;
+  margin: 0px 10px;
+  display: inline-block;
+  position: relative;
+  opacity: 0.75;
+}
+
+.nav-link:hover {
+  opacity: 1;
+}
+
+.nav-link::before {
+  transition: 300ms;
+  height: 2px;
+  content: "";
+  position: absolute;
+  background-color: #031D44;
+}
+
+.nav-link-ltr::before {
+  width: 0%;
+  bottom: 9px;
+}
+
+.nav-link-ltr:hover::before {
+  width: 82%;
+}
+/* navigation css ends here */
