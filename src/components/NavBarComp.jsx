@@ -12,6 +12,7 @@ const NavBarComp = () => {
     const getData = useSelector((state) => state.cartReducer.carts)
     console.log(getData)
     // popup for cart Items
+
     const popover = (
         <Popover id="popover-basic">
             <table>
