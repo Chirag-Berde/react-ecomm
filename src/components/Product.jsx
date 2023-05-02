@@ -1,16 +1,21 @@
-
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import Button from 'react-bootstrap/Button';
 import Spinner from 'react-bootstrap/Spinner';
+import { useDispatch } from 'react-redux';
+import { ADD } from '../redux/actions/action';
 
 
 const Product = () => {
+    const dispatch = useDispatch()
     const { id } = useParams()
     const [product, setProduct] = useState([])
     const [loading, setLoading] = useState(false)
-  
 
+    const send = (item) => {
+        dispatch(ADD(item))
+        alert("Item added successfully")
+    }
     useEffect(() => {
         getProduct()
     }, [])
@@ -49,7 +54,7 @@ const Product = () => {
                             <p className='fw-bolder'>Rating {product.rating && product.rating.rate}</p>
                             <h3>$ {product.price}</h3>
                             <p>{product.description}</p>
-                            <Button variant="dark">Add to Cart</Button>
+                            <Button onClick={() => send(product)} variant="dark">Add to Cart</Button>
                             <Button className='ms-3' variant="dark">Go to Cart</Button>
                         </div>
                     </div>
