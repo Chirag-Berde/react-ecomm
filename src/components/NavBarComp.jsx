@@ -4,15 +4,20 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
+import { REMOVE } from '../redux/actions/action';
 
 const NavBarComp = () => {
     const getData = useSelector((state) => state.cartReducer.carts)
     console.log(getData)
+    const dispatch=useDispatch()
+    // removes an item with a specified ID
+    const remove=(id)=>{
+        dispatch(REMOVE(id))
+    }
     // popup for cart Items
-
     const popover = (
         <Popover id="popover-basic">
             <table>
@@ -33,14 +38,15 @@ const NavBarComp = () => {
                                     </td>
                                     <td>
                                         <div className='text-center mt-3 me-3'>
-
                                             <p className='text-center mb-0 fw-bolder'>{item.category}</p>
-                                            <p className='mb-0'>Price $ {item.price}</p>
-                                            <p className='mb-0'>{item.rating.count}</p>
+                                            <p className='mb-0'>Price: $ {item.price}</p>
+                                            <p className='mb-0'>Rating: {item.rating.rate}&#x2605;</p>
                                             <p className='mb-0'>{item.title.substring(0, 45)}</p>
+                                            <p className='mt-1' onClick={()=>remove(item.id)}> <i class="fa fa-trash fs-4 delete-icon" aria-hidden="true"></i></p>
                                         </div>
                                     </td>
                                  </tr>
+                                 
                             </>
                         })
                     }
